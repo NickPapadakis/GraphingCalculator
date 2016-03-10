@@ -22,6 +22,6 @@ public class Function
 
    private double parse(String expression)
    {
-      return 0;
+      return Parser.parse(expression);
    }
 }
