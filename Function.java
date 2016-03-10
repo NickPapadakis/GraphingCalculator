@@ -1,4 +1,4 @@
-import java.util.Point;
+import java.awt.Point;
 
 public class Function
 {
