@@ -38,7 +38,7 @@ public class Parser{
          eatSpace();
          if(c == '/'){
             eatChar();
-            c /= parseFactor();
+            v /= parseFactor();
          } else if(c == '*' || c == '('){
             if(c == '*'){
                eatChar();
@@ -84,6 +84,7 @@ public class Parser{
       if(negate){
          v = -v;
       }
+      //System.out.println(v);
       return v;
    }
 }
