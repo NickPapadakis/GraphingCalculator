@@ -75,15 +75,16 @@ public class Function
    }
 
    public double calculateIntersection(Function other, double leftXBound, 
-      double rightXBound)
+      double rightXBound) throws IntersectionNotFoundException
    {
       double stepSize = (rightXBound - leftXBound) / steps;
       double intersectionXValue = 0;
+      boolean foundValue = false;
       ArrayList<Double> xValues = new ArrayList<Double>();
       ArrayList<Double> thisYValues = new ArrayList<Double>();
       ArrayList<Double> otherYValues = new ArrayList<Double>();
 
-      while(true)
+      do
       {
          // Populate arrays
          for(int i = 0; i < steps; i++)
@@ -97,7 +98,7 @@ public class Function
          // Search through the ArrayLists to find an exact intersection or 
          // a domain where and intersection occurred
          boolean intersectionDetected = false;
-         boolean foundValue = false;
+         foundValue = false;
          for(int i = 0; i < steps; i++)
          {
             double originalDiff = 0;
@@ -126,19 +127,13 @@ public class Function
             }
          }
      
-         // If it found the exact intersection in the ArrayList, stop looking 
-         if(foundValue)
+         // If it found no evidence of an intersection, throw an exception
+         if(!intersectionDetected)
          {
-            System.out.println(intersectionXValue);
-            break;
+            throw new IntersectionNotFoundException();
          }
-         // If it found no evidence of an intersection, stop looking
-         else if(!intersectionDetected)
-         {
-            System.out.println("No intersection detected");
-            break;
-         }
-      }
+      } while(!foundValue);
+
       return intersectionXValue;
    }
 }
