@@ -10,8 +10,27 @@ public class ParserTests {
       //String expression = "5 + x";
       //System.out.println(replaceVariables(22, expression)+"--- 5 + 22") ;
       
-      Function f = new Function("2^x - x + 1 + x * ((4+4*4)/2) / 5 + -5");
-      System.out.println(f.getValue(6.1645));
+      //Function f = new Function("2^x - x + 1 + x * ((4+4*4)/2) / 5 + -5");
+      //System.out.println(f.getValue(6.1645));
+      
+      //Function f = new Function("s(x) + 5"); //sin of 
+      //System.out.println(f.getValue(5));
+      // f = new Function("c(x) + 5"); //cos of 
+      //System.out.println(f.getValue(5));
+      // f = new Function("t(x) + 5"); //tan of 
+      //System.out.println(f.getValue(5));
+      // f = new Function("S(x) + 5"); //arcsin of 
+      //System.out.println(f.getValue(.5));
+      // f = new Function("C(x) + 5"); //arccos of 
+      //System.out.println(f.getValue(.5));
+      //f = new Function("T(x) + 5"); //arctan of 
+      //System.out.println(f.getValue(.5));
+      Function f = new Function("s(x)");
+      System.out.println(f.getValue(Math.PI));
+      System.out.println(f.getValue(Math.PI/2));
+      System.out.println(f.getValue(Math.PI/4));
+      
+      
    
    }
    

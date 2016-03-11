@@ -67,6 +67,7 @@ public class Parser{
       }
       else{
          int startIndex = pos;
+         boolean small = false;
          while((c >='0' && c <='9') || c =='.'){
             eatChar();
          }
@@ -86,5 +87,117 @@ public class Parser{
       }
       //System.out.println(v);
       return v;
+   }
+   
+   private static double findArgVal(int j, String s)
+   {
+      String replace = s.substring(j+2);
+      boolean found = false;
+      int parendCount = 1;
+      int index = 0;
+      for(int i = 0; i < replace.length() || !found; i++){
+         if(parendCount == 0){
+            found = true;
+            index = i;
+            break;
+         }
+         if(replace.charAt(i) == '('){
+            parendCount++;
+         }else if(replace.charAt(i) == ')'){
+            parendCount--;
+         }
+      }
+      String ex = s.substring(j+1,index+1);
+      double val =(parse(ex));
+      //System.out.println(val);
+      return val;
+   }
+   private static String replaceFunction(int j, String s, double v)
+   {
+      String replace = s.substring(j+2);
+      boolean found = false;
+      int parendCount = 1;
+      int index = 0;
+      for(int i = 0; i < replace.length() || !found; i++){
+         if(replace.charAt(i) == '('){
+            parendCount++;
+         }else if(replace.charAt(i) == ')'){
+            parendCount--;
+            if(parendCount == 0){
+               found = true;
+               index = i;
+               break;
+            }
+         }
+      }
+      String stringVal = handleSciNotation(v);
+      return s.substring(0,j) + stringVal + s.substring(index+3);
+   }
+   private static String handleSciNotation(double v){
+      String sval = String.valueOf(v);
+      int index = sval.indexOf('E');
+      if(index == -1){
+         return sval;
+      }
+      String rawVal = sval.substring(0,index);
+      String exVal = sval.substring(index+1);
+      
+      //System.out.println(rawVal);
+      //System.out.println(exVal);
+      
+      int exponent = Integer.parseInt(exVal);
+      if(exponent<=10){
+         return "0";
+      }
+      rawVal = rawVal.substring(0,1) + rawVal.substring(2);
+      if(exponent<0){
+         for(int i = 1; i < -1*exponent; i++){
+            rawVal = "0" + rawVal;
+         }
+         return "."+rawVal;
+      }
+      if(exponent>0){
+         if(rawVal.length()-1 < exponent){
+            for(int i = 0; i <= exponent-rawVal.length(); i++){
+               rawVal = rawVal + "0";
+            }
+            System.out.println(rawVal);
+            return rawVal;
+         }
+         return rawVal.substring(0,exponent+1) + "." + rawVal.substring(exponent);
+      }
+      else{
+         System.out.println("Error in handlescinotation");
+         return "ERROR";
+      }
+      
+      
+      
+   }
+   
+   public static String sin(int i, String s)
+   {  
+      return replaceFunction(i,s,Math.sin(findArgVal(i,s)));
+      
+   }
+   public static String cos(int i, String s)
+   {
+      return replaceFunction(i,s,Math.cos(findArgVal(i,s)));
+   }
+   public static String tan(int i, String s)
+   {
+      return replaceFunction(i,s,Math.tan(findArgVal(i,s)));
+   }
+   public static String arcsin(int i, String s)
+   {
+      return replaceFunction(i,s,Math.asin(findArgVal(i,s)));
+   }
+   public static String arccos(int i, String s)
+   {
+      return replaceFunction(i,s,Math.acos(findArgVal(i,s)));
+   }
+   public static String arctan(int i, String s)
+   {
+      return replaceFunction(i,s,Math.atan(findArgVal(i,s)));
    }
 }

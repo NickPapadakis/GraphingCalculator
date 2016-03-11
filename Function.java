@@ -18,13 +18,58 @@ public class Function
 
    private String replaceVariables(double x)
    {
+      ArrayList<Character> supportedFunctions = new ArrayList<Character>();
+      supportedFunctions.add('s'); //sin
+      supportedFunctions.add('c'); //cos
+      supportedFunctions.add('t'); //tan
+      supportedFunctions.add('S'); //arcsin
+      supportedFunctions.add('C'); //arccos
+      supportedFunctions.add('T'); //arctan
       String s = function;
+      //System.out.println(s);
       for(int i = 0; i < s.length(); i++)
       {
          if(s.charAt(i) == 'x')
          {
             s = s.substring(0,i) + x + s.substring(i+1);
          }
+      }
+      for(int i = 0; i < s.length(); i++)  //two loops because variable must be replaced first
+      {
+         if(supportedFunctions.contains(s.charAt(i)))
+         {
+            s = replaceWithFunction(i, s);
+         }
+      }
+      //System.out.println(s);
+      return s;
+   }
+   private String replaceWithFunction(int i, String s)
+   {
+      char fchar = s.charAt(i);
+      if(fchar == 's')
+      {
+         s = Parser.sin(i,s);
+      }
+      else if(fchar == 'c')
+      {
+         s = Parser.cos(i,s);
+      }
+      else if(fchar == 't')
+      {
+         s = Parser.tan(i,s);
+      }
+      else if(fchar == 'S')
+      {
+         s = Parser.arcsin(i,s);
+      }
+      else if(fchar == 'C')
+      {
+         s = Parser.arccos(i,s);
+      }
+      else if(fchar == 'T')
+      {
+         s = Parser.arctan(i,s);
       }
       return s;
    }
