@@ -1,14 +1,155 @@
+import java.util.ArrayList;
 public class Parser{
    private static int pos;
    private static int c;
    private static String expression;
-   public static double parse(String ex){
+   public static double parse(String ex, double x){
+      ex = replaceVariables(x, ex);
       pos = -1;
       expression = ex;
       eatChar();
       double v = parseExpression();
       return v;
    }
+   
+   
+   
+   private static String replaceVariables(double x, String function)
+   {
+      //special character codes to look for and replace.
+      ArrayList<Character> supportedFunctions = new ArrayList<Character>();
+      supportedFunctions.add('s'); //sin
+      supportedFunctions.add('c'); //cos
+      supportedFunctions.add('t'); //tan
+      supportedFunctions.add('S'); //arcsin
+      supportedFunctions.add('C'); //arccos
+      supportedFunctions.add('T'); //arctan
+      supportedFunctions.add('L'); //arctan
+      supportedFunctions.add('l'); //arctan
+      supportedFunctions.add('n'); //arctan
+      String s = function;
+      //System.out.println(s);
+      
+      //This loop replaces 'x' with the double x
+      for(int i = 0; i < s.length(); i++)
+      {
+         if(s.charAt(i) == 'x')
+         {
+            s = s.substring(0,i) + x + s.substring(i+1);
+            //System.out.println(s);
+         }
+      }
+      
+      //this loop replaces the predefined functions with numbers.
+      for(int i = 0; i < s.length(); i++)  //two loops because variable must be replaced first
+      {
+         if(supportedFunctions.contains(s.charAt(i)))
+         {
+            s = replaceWithFunction(i, s);
+         }
+      }
+      //System.out.println(s);
+      return s;
+   }
+   private static String replaceWithFunction(int i, String s)
+   {
+      //figures out what function to preform.
+      char fchar = s.charAt(i); //trig
+      if(fchar == 's')
+      {
+         s = Parser.sin(i,s);
+      }
+      else if(fchar == 'c')
+      {
+         s = Parser.cos(i,s);
+      }
+      else if(fchar == 't')
+      {
+         s = Parser.tan(i,s);
+      }
+      else if(fchar == 'S')
+      {
+         s = Parser.arcsin(i,s);
+      }
+      else if(fchar == 'C')
+      {
+         s = Parser.arccos(i,s);
+      }
+      else if(fchar == 'T')
+      {
+         s = Parser.arctan(i,s);
+      }
+      else if(fchar == 'L') //log
+      {
+         s = Parser.logBaseTwo(i,s);
+      }
+      else if(fchar == 'l')
+      {
+         s = Parser.logBase10(i,s);
+      }
+      else if(fchar == 'n')
+      {
+         s = Parser.naturalLog(i,s);
+      }
+      return s;
+   }
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
    private static void eatChar(){
       c = (++pos < expression.length()) ? expression.charAt(pos) : -1;
    }
@@ -121,7 +262,7 @@ public class Parser{
       //System.out.println(j + " "  + index +" " + s);
       String ex = s.substring(j+2,j+index+1);
       //System.out.println(ex);
-      double val =(parse(ex));
+      double val =(parse(ex, 0));
       return val;
    }
    private static String replaceFunction(int j, String s, double v)

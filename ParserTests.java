@@ -13,7 +13,7 @@ public class ParserTests {
       //Function f = new Function("2^x - x + 1 + x * ((4+4*4)/2) / 5 + -5");
       //System.out.println(f.getValue(6.1645));
       //
-      Function f = new Function("s(5)"); //sin of 
+      Function f = new Function("s(x)"); //sin of 
       System.out.println(f.getValue(5));
       // f = new Function("c(x) + 5"); //cos of 
       //System.out.println(f.getValue(5));
