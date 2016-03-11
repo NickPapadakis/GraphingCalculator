@@ -200,4 +200,16 @@ public class Parser{
    {
       return replaceFunction(i,s,Math.atan(findArgVal(i,s)));
    }
+   public static String logBaseTwo(int i, String s)
+   {
+      return replaceFunction(i,s,Math.log(findArgVal(i,s))/Math.log(2));
+   }
+   public static String logBase10(int i, String s)
+   {
+      return replaceFunction(i,s,Math.log10(findArgVal(i,s)));
+   }
+   public static String naturalLog(int i, String s)
+   {
+      return replaceFunction(i,s,Math.log(findArgVal(i,s)));
+   }
 }

@@ -22,6 +22,9 @@ public class Function
       supportedFunctions.add('S'); //arcsin
       supportedFunctions.add('C'); //arccos
       supportedFunctions.add('T'); //arctan
+      supportedFunctions.add('L'); //arctan
+      supportedFunctions.add('l'); //arctan
+      supportedFunctions.add('n'); //arctan
       String s = function;
       //System.out.println(s);
       for(int i = 0; i < s.length(); i++)
@@ -43,7 +46,7 @@ public class Function
    }
    private String replaceWithFunction(int i, String s)
    {
-      char fchar = s.charAt(i);
+      char fchar = s.charAt(i); //trig
       if(fchar == 's')
       {
          s = Parser.sin(i,s);
@@ -67,6 +70,18 @@ public class Function
       else if(fchar == 'T')
       {
          s = Parser.arctan(i,s);
+      }
+      else if(fchar == 'L') //log
+      {
+         s = Parser.logBaseTwo(i,s);
+      }
+      else if(fchar == 'l')
+      {
+         s = Parser.logBase10(i,s);
+      }
+      else if(fchar == 'n')
+      {
+         s = Parser.naturalLog(i,s);
       }
       return s;
    }

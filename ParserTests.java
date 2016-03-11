@@ -6,13 +6,13 @@ public class ParserTests {
       //System.out.println(Parser.parse("5 * 5 / 5") + " ---5");
       //System.out.println(Parser.parse("5 ^ ( 2 * 3 ) + 8") + "---15633");
       //System.out.println(Parser.parse("2^3 - 3 + 1 + 3 * ((4+4*4)/2) / 5 + -5") + "---7");
-      
+      //
       //String expression = "5 + x";
       //System.out.println(replaceVariables(22, expression)+"--- 5 + 22") ;
-      
+      //
       //Function f = new Function("2^x - x + 1 + x * ((4+4*4)/2) / 5 + -5");
       //System.out.println(f.getValue(6.1645));
-      
+      //
       //Function f = new Function("s(x) + 5"); //sin of 
       //System.out.println(f.getValue(5));
       // f = new Function("c(x) + 5"); //cos of 
@@ -25,13 +25,20 @@ public class ParserTests {
       //System.out.println(f.getValue(.5));
       //f = new Function("T(x) + 5"); //arctan of 
       //System.out.println(f.getValue(.5));
-      Function f = new Function("s(x)");
-      System.out.println(f.getValue(Math.PI));
-      System.out.println(f.getValue(Math.PI/2));
-      System.out.println(f.getValue(Math.PI/4));
-      
-      
-   
+      //Function f = new Function("s(x)");
+      //System.out.println(f.getValue(Math.PI));
+      //System.out.println(f.getValue(Math.PI/2));
+      //System.out.println(f.getValue(Math.PI/4));
+      //
+      //Function f = new Function("l(x)");
+      //System.out.println(f.getValue(10));
+      //f = new Function("L(x)");
+      //System.out.println(f.getValue(10));
+      //f = new Function("n(x)");
+      //System.out.println(f.getValue(10000));
+      //for(int i = 1; i<1000000; i++){
+      //   System.out.println(g.getValue(i));
+      //}
    }
    
    private static String replaceVariables(double x, String s)
