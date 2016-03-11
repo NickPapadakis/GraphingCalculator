@@ -1,5 +1,13 @@
 import java.util.ArrayList;
-
+/**
+    * will hold function. the Parser is very particular 
+    * about formatting, especially around variables. Avoid a uniary minus
+    * with a variable. ex. -x instead write as -1*x. Also it will call any 
+    * number smaller than 10^-10 zero due to double impercision. 
+    *
+    *
+    *
+    */
 public class Function
 {
    private static final double E = 0.00000000001;
@@ -10,14 +18,17 @@ public class Function
    {
       this.function = function;
    }
-
+   
    public double getValue(double x)
    {
+      // first replace special characters, then send it to the
+      // parser to be evaluated.
       return Parser.parse(replaceVariables(x));
    }
 
    private String replaceVariables(double x)
    {
+      //special character codes to look for and replace.
       ArrayList<Character> supportedFunctions = new ArrayList<Character>();
       supportedFunctions.add('s'); //sin
       supportedFunctions.add('c'); //cos
@@ -30,13 +41,18 @@ public class Function
       supportedFunctions.add('n'); //arctan
       String s = function;
       //System.out.println(s);
+      
+      //This loop replaces 'x' with the double x
       for(int i = 0; i < s.length(); i++)
       {
          if(s.charAt(i) == 'x')
          {
             s = s.substring(0,i) + x + s.substring(i+1);
+            //System.out.println(s);
          }
       }
+      
+      //this loop replaces the predefined functions with numbers.
       for(int i = 0; i < s.length(); i++)  //two loops because variable must be replaced first
       {
          if(supportedFunctions.contains(s.charAt(i)))
@@ -49,6 +65,7 @@ public class Function
    }
    private String replaceWithFunction(int i, String s)
    {
+      //figures out what function to preform.
       char fchar = s.charAt(i); //trig
       if(fchar == 's')
       {

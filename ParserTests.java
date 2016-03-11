@@ -39,6 +39,13 @@ public class ParserTests {
       //for(int i = 1; i<1000000; i++){
       //   System.out.println(g.getValue(i));
       //}
+      
+      Function f = new Function("-1 * x");
+      System.out.println(f.getValue(1));
+      Function g = new Function("x");
+      System.out.println(f.getValue(1));
+      //System.out.println(f.calculateIntersection(g, 10,  20));
+      System.out.println(f.calculateIntersection(g, -2,  2));
    }
    
    private static String replaceVariables(double x, String s)
