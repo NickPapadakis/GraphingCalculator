@@ -106,6 +106,21 @@ public class Function
       return s;
    }
 
+   /**
+   * Calculates the intersection of this Function and another based off of a
+   * a range of x values. Only one intersection can exist between the given
+   * x values. If an intersection is not detected, an 
+   * IntersectionNotFoundException will be thrown.
+   *
+   * @param other The other Function to find an intersection with.
+   * @param leftXBound The left x bound of the domain to look for an 
+   * intersection.
+   * @param rightXBound The right x bound of the domain to look for an 
+   * intersection.
+   * @return The x value where the intersection occurs.
+   * @throws IntersectionNotFoundException Throws this exception if there is no 
+   * intersection between the given x values;
+   */
    public double calculateIntersection(Function other, double leftXBound, 
       double rightXBound) throws IntersectionNotFoundException
    {
