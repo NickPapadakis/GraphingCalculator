@@ -87,4 +87,74 @@ public class Parser{
       //System.out.println(v);
       return v;
    }
+   
+   private static double findArgVal(int j, String s)
+   {
+      String replace = s.substring(j+2);
+      boolean found = false;
+      int parendCount = 1;
+      int index = 0;
+      for(int i = 0; i < replace.length() || !found; i++){
+         if(parendCount == 0){
+            found = true;
+            index = i;
+            break;
+         }
+         if(replace.charAt(i) == '('){
+            parendCount++;
+         }else if(replace.charAt(i) == ')'){
+            parendCount--;
+         }
+      }
+      String ex = s.substring(j+1,index+1);
+      double val =(parse(ex));
+      return val;
+   }
+   private static String replaceFunction(int j, String s, double v)
+   {
+      String replace = s.substring(j+2);
+      boolean found = false;
+      int parendCount = 1;
+      int index = 0;
+      for(int i = 0; i < replace.length() || !found; i++){
+         if(replace.charAt(i) == '('){
+            parendCount++;
+         }else if(replace.charAt(i) == ')'){
+            parendCount--;
+            if(parendCount == 0){
+               found = true;
+               index = i;
+               break;
+            }
+         }
+      }
+      //System.out.println(s.substring(index+3));
+      return s.substring(0,j) + v + s.substring(index+3);
+   }
+   
+   public static String sin(int i, String s)
+   {  
+      return replaceFunction(i,s,Math.sin(findArgVal(i,s)));
+      
+   }
+   public static String cos(int i, String s)
+   {
+      return replaceFunction(i,s,Math.cos(findArgVal(i,s)));
+   }
+   public static String tan(int i, String s)
+   {
+      return replaceFunction(i,s,Math.tan(findArgVal(i,s)));
+   }
+   public static String arcsin(int i, String s)
+   {
+      return replaceFunction(i,s,Math.asin(findArgVal(i,s)));
+   }
+   public static String arccos(int i, String s)
+   {
+      return replaceFunction(i,s,Math.acos(findArgVal(i,s)));
+   }
+   public static String arctan(int i, String s)
+   {
+      return replaceFunction(i,s,Math.atan(findArgVal(i,s)));
+   }
 }
