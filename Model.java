@@ -60,7 +60,7 @@ public class Model
             catch(SyntaxException se)
             {
                System.out.println("Syntax Error");
-               se.printStackTrace();
+               currentFunction = se.getText();
             }
          }
          checkNumbers(src);

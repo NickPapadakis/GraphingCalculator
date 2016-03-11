@@ -73,6 +73,7 @@ public class Parser{
          }
          if(pos==startIndex){
             throw new SyntaxException("Error Char:" + (char)c);
+            //return "Error Char:" + (char)c;
          }
          try
          {
@@ -81,6 +82,7 @@ public class Parser{
          catch(NumberFormatException ne)
          {
             throw new SyntaxException("Error Char:" + (char)c);
+            //return "Error Char:" + (char)c;
          }
       }
       eatSpace();
