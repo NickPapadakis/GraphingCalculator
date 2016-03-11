@@ -26,7 +26,7 @@ public class Function
       return Parser.parse(replaceVariables(x));
    }
 
-   private String replaceVariables(double x)
+   public String replaceVariables(double x)
    {
       //special character codes to look for and replace.
       ArrayList<Character> supportedFunctions = new ArrayList<Character>();
@@ -57,6 +57,7 @@ public class Function
       {
          if(supportedFunctions.contains(s.charAt(i)))
          {
+            //System.out.println("y");
             s = replaceWithFunction(i, s);
          }
       }

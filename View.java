@@ -78,16 +78,19 @@ public class View extends JFrame
       numberPad.get(9).setBounds(332, 700, 166, 50);
       operations = new ArrayList<JButton>();
       JButton temp = new JButton("+");
-      temp.setBounds(0,550,125,50);
+      temp.setBounds(0,550,100,50);
       operations.add(temp);
       temp = new JButton("-");
-      temp.setBounds(125,550,125,50);
+      temp.setBounds(100,550,100,50);
       operations.add(temp);
       temp = new JButton("*");
-      temp.setBounds(250,550,125,50);
+      temp.setBounds(200,550,100,50);
       operations.add(temp);
       temp = new JButton("/");
-      temp.setBounds(375,550,125,50);
+      temp.setBounds(300,550,100,50);
+      operations.add(temp);
+      temp = new JButton("=");
+      temp.setBounds(400,550,100,50);
       operations.add(temp);
       
       trig = new ArrayList<JButton>();
@@ -142,7 +145,6 @@ public class View extends JFrame
       clearEquations.setBounds(300,350,100,50);
       findIntersects = new JButton("Intersect");
       findIntersects.setBounds(400,350,100,50);
-      
       
 
    }
