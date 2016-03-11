@@ -3,14 +3,24 @@ import java.awt.Graphics;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
+import java.awt.Color;
+import java.awt.Font;
 public class Model
 {
    private static ArrayList<Function> userFunctions;
+   private static ArrayList<String> previousFunctions;
    private static String currentFunction;
-   
-   public static void draw(Graphics pen)
+   private static Graphics pen;
+   public static void draw()
    {
-      
+      pen.setColor(Color.WHITE);
+      pen.fillRect(0,0,600,320);
+      pen.setColor(Color.BLACK);
+      pen.drawString(currentFunction,0,300);
+      for(int i = 0; i < previousFunctions.size();i++)
+      {
+         pen.drawString(previousFunctions.get(i),0,250-(50*i));
+      }
    }
    
    
@@ -43,6 +53,7 @@ public class Model
             {
                //System.out.println(currentFunction);
                Function tempf = new Function(currentFunction);
+               previousFunctions.add(0,currentFunction);
                //System.out.println(tempf.getValue(5));
                currentFunction = Double.toString(tempf.getValue(0));
             }
@@ -55,7 +66,8 @@ public class Model
          checkNumbers(src);
          checkFunctions(src);
          
-         System.out.println(currentFunction);
+         //System.out.println(currentFunction);
+         draw();
       }
       private void checkNumbers(JButton src)
       {
@@ -102,6 +114,13 @@ public class Model
          else if(src.getText().equals("."))
          {
             currentFunction+=".";
+         }
+         else if(src.getText().equals("del"))
+         {
+            if(currentFunction.length()>0)
+            {
+               currentFunction = currentFunction.substring(0,currentFunction.length()-1);
+            }
          }
       }
       
@@ -166,7 +185,10 @@ public class Model
    
    public static void main(String[] args)
    {
+      previousFunctions = new ArrayList<String>();
       currentFunction = "";
       View v = new View(new ButtonHandler());
+      pen = v.getPen();
+      pen.setFont(new Font(null,50,50));
    }
 }

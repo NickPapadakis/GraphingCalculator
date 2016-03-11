@@ -5,7 +5,6 @@ public class Parser{
    public static double parse(String ex){
       pos = -1;
       expression = ex;
-      
       eatChar();
       double v = parseExpression();
       return v;

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class View extends JFrame
 {
    private JPanel p;
-   private Graphics pen;
    private ArrayList<JButton> numberPad;
    private ArrayList<JButton> operations;
    private ArrayList<JButton> trig;
@@ -178,6 +177,6 @@ public class View extends JFrame
    }
    public Graphics getPen()
    {
-      return pen;
+      return p.getGraphics();
    }
 }

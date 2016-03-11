@@ -57,7 +57,6 @@ public class Function
       {
          if(supportedFunctions.contains(s.charAt(i)))
          {
-            //System.out.println("y");
             s = replaceWithFunction(i, s);
          }
       }
