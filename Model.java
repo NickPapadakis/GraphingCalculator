@@ -101,6 +101,10 @@ public class Model
          {
             currentFunction += " * ";
          }
+         else if(src.getText().equals("^"))
+         {
+            currentFunction += " ^ ";
+         }
          else if(src.getText().equals("="))
          {
             try
