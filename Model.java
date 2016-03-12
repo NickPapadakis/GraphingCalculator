@@ -12,6 +12,7 @@ public class Model
    private static String currentFunction;
    private static Graphics pen;
    private static boolean showGraph;
+   private static double xScale, yScale;
    public static void draw()
    {
       pen.setColor(Color.WHITE);
@@ -59,10 +60,13 @@ public class Model
       {
          try
          {
-            double y = f.getValue(i);
+            double y = f.getValue(i/xScale);
             int xPixel = 250 + i;
-            int yPixel = 150 - (int)y;
-            pen.fillRect(xPixel,yPixel,2,2);
+            int yPixel = 150 - ((int)(y*yScale));
+            if(yPixel<=300 && yPixel>=0)
+            {
+               pen.fillRect(xPixel,yPixel,2,2);
+            }
          }
          catch(Exception e)
          {
@@ -123,7 +127,7 @@ public class Model
       {
          if(src.getText().equals("x"))
          {
-            currentFunction += "x";
+            currentFunction += "(x)";
          }
          else if(src.getText().equals("Graph"))
          {
@@ -264,6 +268,8 @@ public class Model
    
    public static void main(String[] args)
    {
+      xScale = 10;
+      yScale = 10;
       userFunctions = new ArrayList<Function>();
       previousFunctions = new ArrayList<String>();
       currentFunction = "";
