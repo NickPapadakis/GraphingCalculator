@@ -40,12 +40,12 @@ public class ParserTests {
       //   System.out.println(f.getValue(i));
       //}
       
-      Function f = new Function("-1 * x");
+      Function f = new Function("(x) ^ 2");
       System.out.println(f.getValue(0));
       Function g = new Function("x");
       System.out.println(g.getValue(0));
-      System.out.println(f.calculateIntersection(g, 10,  20));
-      System.out.println(f.calculateIntersection(g, -2,  2));
+      //System.out.println(f.calculateIntersection(g, 10,  20));
+      System.out.println(f.calculateIntersection(g, -.000000001,  1.1));
       //System.out.println(Parser.parse("6.1E-6",0));
       
    }

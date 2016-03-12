@@ -10,8 +10,8 @@ import java.util.ArrayList;
     */
 public class Function
 {
-   private static final double E = 0.00000000001;
-   private static final int steps = 10;
+   private static final double E = 1E-20;
+   private static final int steps = 1000;
    private String function;
 
    public Function(String function)
@@ -51,7 +51,9 @@ public class Function
 
       do
       {
+         stepSize = (rightXBound - leftXBound) / steps;
          // Populate arrays
+         //System.out.println("left " + leftXBound + " right " + rightXBound);
          for(int i = 0; i < steps; i++)
          {
            double x = leftXBound + stepSize * i;
@@ -59,21 +61,24 @@ public class Function
            thisYValues.add(i, getValue(x));
            otherYValues.add(i, other.getValue(x));
          }
-
+         
          // Search through the ArrayLists to find an exact intersection or 
          // a domain where and intersection occurred
          boolean intersectionDetected = false;
          foundValue = false;
+         double originalDiff = 0;
          for(int i = 0; i < steps; i++)
          {
-            double originalDiff = 0;
+            
             double currentDiff = 
                thisYValues.get(i).doubleValue() 
                - otherYValues.get(i).doubleValue();
-            if(currentDiff < E)
+            //System.out.println(currentDiff);
+            if(Math.abs(currentDiff) < E)
             {
                foundValue = true;
-               intersectionXValue = thisYValues.get(i).doubleValue();
+               intersectionDetected = true;
+               intersectionXValue = xValues.get(i).doubleValue();
                break;
             }
             if(i == 0)
@@ -86,8 +91,8 @@ public class Function
                // If it found the bounds of a domain where an intersection
                // occurred, start the search over in that domain
                intersectionDetected = true;
-               leftXBound = xValues.get(i);
-               rightXBound = xValues.get(i + 1);      
+               leftXBound = xValues.get(i-1);
+               rightXBound = xValues.get(i+1);      
                break;
             }
          }
@@ -98,7 +103,10 @@ public class Function
             throw new IntersectionNotFoundException();
          }
       } while(!foundValue);
-
+      if(intersectionXValue - Math.round(intersectionXValue) < 1E-10)
+      {
+            return Math.round(intersectionXValue);
+      }
       return intersectionXValue;
    }
 }
