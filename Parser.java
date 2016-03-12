@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 public class Parser{
+   private static final double E = 1E-10;
    private static int pos;
    private static int c;
    private static String expression;
@@ -9,10 +10,13 @@ public class Parser{
       expression = ex;
       eatChar();
       double v = parseExpression();
+      //System.out.println(v);
+      if(v>-E && v<E)
+      {
+         return 0;
+      }
       return v;
    }
-   
-   
    
    private static String replaceVariables(double x, String function)
    {
@@ -209,7 +213,7 @@ public class Parser{
       else{
          int startIndex = pos;
          boolean small = false;
-         while((c >='0' && c <='9') || c =='.'){
+         while((c >='0' && c <='9') || c =='.' || c == 'E' || c == '-'){
             eatChar();
          }
          if(pos==startIndex){

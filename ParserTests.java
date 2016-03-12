@@ -13,8 +13,8 @@ public class ParserTests {
       //Function f = new Function("2^x - x + 1 + x * ((4+4*4)/2) / 5 + -5");
       //System.out.println(f.getValue(6.1645));
       //
-      Function f = new Function("s(x)"); //sin of 
-      System.out.println(f.getValue(5));
+      //Function f = new Function("s(x)"); //sin of 
+      //System.out.println(f.getValue(5));
       // f = new Function("c(x) + 5"); //cos of 
       //System.out.println(f.getValue(5));
       // f = new Function("t(x) + 5"); //tan of 
@@ -40,12 +40,14 @@ public class ParserTests {
       //   System.out.println(f.getValue(i));
       //}
       
-      //Function f = new Function("-1 * x");
-      //System.out.println(f.getValue(1));
-      //Function g = new Function("x");
-      //System.out.println(f.getValue(1));
-      ///System.out.println(f.calculateIntersection(g, 10,  20));
-      //System.out.println(f.calculateIntersection(g, -2,  2));
+      Function f = new Function("-1 * x");
+      System.out.println(f.getValue(0));
+      Function g = new Function("x");
+      System.out.println(g.getValue(0));
+      System.out.println(f.calculateIntersection(g, 10,  20));
+      System.out.println(f.calculateIntersection(g, -2,  2));
+      //System.out.println(Parser.parse("6.1E-6",0));
+      
    }
    
    private static String replaceVariables(double x, String s)

@@ -21,8 +21,6 @@ public class Function
    
    public double getValue(double x)
    {
-      // first replace special characters, then send it to the
-      // parser to be evaluated.
       return Parser.parse(function, x);
    }
 

@@ -19,7 +19,7 @@ public class Model
       pen.drawString(currentFunction,0,300);
       for(int i = 0; i < previousFunctions.size();i++)
       {
-         pen.drawString(previousFunctions.get(i),0,250-(50*i));
+         pen.drawString(previousFunctions.get(i),0,280-(20*i));
       }
    }
    
@@ -189,6 +189,6 @@ public class Model
       currentFunction = "";
       View v = new View(new ButtonHandler());
       pen = v.getPen();
-      pen.setFont(new Font(null,50,50));
+      pen.setFont(new Font(null,20,20));
    }
 }
