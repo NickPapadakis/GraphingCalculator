@@ -5,19 +5,19 @@ public class Parser{
    private static int c;
    private static String expression;
    public static double parse(String ex, double x){
+      //parse variables and special equations first;
       ex = replaceVariables(x, ex);
       pos = -1;
       expression = ex;
       eatChar();
       double v = parseExpression();
-      //System.out.println(v);
+      //if its super close to zero, it is zero
       if(v>-E && v<E)
       {
          return 0;
       }
       return v;
-   }
-   
+   } 
    private static String replaceVariables(double x, String function)
    {
       //special character codes to look for and replace.
@@ -31,21 +31,19 @@ public class Parser{
       supportedFunctions.add('L'); //arctan
       supportedFunctions.add('l'); //arctan
       supportedFunctions.add('n'); //arctan
-      String s = function;
-      //System.out.println(s);
-      
-      //This loop replaces 'x' with the double x
+      String s = function; 
+      //replace x
       for(int i = 0; i < s.length(); i++)
       {
          if(s.charAt(i) == 'x')
          {
             s = s.substring(0,i) + x + s.substring(i+1);
-            //System.out.println(s);
          }
       }
       
-      //this loop replaces the predefined functions with numbers.
-      for(int i = 0; i < s.length(); i++)  //two loops because variable must be replaced first
+      //replace special functions with number values
+      for(int i = 0; i < s.length(); i++)  //two loops because variable must 
+                                           //be replaced first
       {
          if(supportedFunctions.contains(s.charAt(i)))
          {
@@ -61,99 +59,42 @@ public class Parser{
       char fchar = s.charAt(i); //trig
       if(fchar == 's')
       {
-         s = Parser.sin(i,s);
+         s = sin(i,s);
       }
       else if(fchar == 'c')
       {
-         s = Parser.cos(i,s);
+         s = cos(i,s);
       }
       else if(fchar == 't')
       {
-         s = Parser.tan(i,s);
+         s = tan(i,s);
       }
       else if(fchar == 'S')
       {
-         s = Parser.arcsin(i,s);
+         s = arcsin(i,s);
       }
       else if(fchar == 'C')
       {
-         s = Parser.arccos(i,s);
+         s = arccos(i,s);
       }
       else if(fchar == 'T')
       {
-         s = Parser.arctan(i,s);
+         s = arctan(i,s);
       }
       else if(fchar == 'L') //log
       {
-         s = Parser.logBaseTwo(i,s);
+         s = logBaseTwo(i,s);
       }
       else if(fchar == 'l')
       {
-         s = Parser.logBase10(i,s);
+         s = logBase10(i,s);
       }
       else if(fchar == 'n')
       {
-         s = Parser.naturalLog(i,s);
+         s = naturalLog(i,s);
       }
       return s;
    }
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
    private static void eatChar(){
       c = (++pos < expression.length()) ? expression.charAt(pos) : -1;
    }
@@ -238,19 +179,15 @@ public class Parser{
       if(negate){
          v = -v;
       }
-      //System.out.println(v);
       return v;
    }
-   
    private static double findArgVal(int j, String s)
    {
-      //System.out.println(s);
       String replace = s.substring(j+2);
       boolean found = false;
       int parendCount = 1;
       int index = 0;
       for(int i = 0; i < replace.length() || !found; i++){
-         //System.out.println(replace.charAt(i));
          if(parendCount == 0){
             found = true;
             index = i;
@@ -262,10 +199,7 @@ public class Parser{
             parendCount--;
          }
       }
-      //System.out.println("char at" + s.charAt(index));
-      //System.out.println(j + " "  + index +" " + s);
       String ex = s.substring(j+2,j+index+1);
-      //System.out.println(ex);
       double val =(parse(ex, 0));
       return val;
    }
@@ -287,10 +221,11 @@ public class Parser{
             }
          }
       }
-      String stringVal = handleSciNotation(v);
-      return s.substring(0,j) + stringVal + s.substring(j+index+3);
-   }
-   public static String handleSciNotation(double v){
+      //String stringVal = handleSciNotation(v);
+      return s.substring(0,j) + v + s.substring(j+index+3);
+   }  
+   //this might be able to be removed, needs some testing first though
+   private static String handleSciNotation(double v){
       String sval = String.valueOf(v);
       int index = sval.indexOf('E');
       if(index == -1){
@@ -304,12 +239,9 @@ public class Parser{
          rawVal = rawVal.substring(1);
          pref = "-";
       }
-      //System.out.println(rawVal);
-      //System.out.println(exVal);
       
       int exponent = Integer.parseInt(exVal);
       if(exponent<=-10){
-         //System.out.println("a");
          return "0";
       }
       rawVal = rawVal.substring(0,1) + rawVal.substring(2);
@@ -317,7 +249,6 @@ public class Parser{
          for(int i = 1; i < -1*exponent; i++){
             rawVal = "0" + rawVal;
          }
-         //System.out.println(rawVal);
          return pref+"."+rawVal;
       }
       if(exponent>0){
@@ -325,54 +256,50 @@ public class Parser{
             for(int i = 0; i <= exponent-rawVal.length(); i++){
                rawVal = rawVal + "0";
             }
-            //System.out.println(rawVal);
             return pref+rawVal;
          }
-         return pref+rawVal.substring(0,exponent+1) + "." + rawVal.substring(exponent);
+         return pref+rawVal.substring(0,exponent+1) + "." 
+                     + rawVal.substring(exponent);
       }
       else{
          System.out.println("Error in handlescinotation");
          return "ERROR";
-      }
-      
-      
-      
-   }
-   
-   public static String sin(int i, String s)
+      }      
+   }   
+   private static String sin(int i, String s)
    {  
       return replaceFunction(i,s,Math.sin(findArgVal(i,s)));
       
    }
-   public static String cos(int i, String s)
+   private static String cos(int i, String s)
    {
       return replaceFunction(i,s,Math.cos(findArgVal(i,s)));
    }
-   public static String tan(int i, String s)
+   private static String tan(int i, String s)
    {
       return replaceFunction(i,s,Math.tan(findArgVal(i,s)));
    }
-   public static String arcsin(int i, String s)
+   private static String arcsin(int i, String s)
    {
       return replaceFunction(i,s,Math.asin(findArgVal(i,s)));
    }
-   public static String arccos(int i, String s)
+   private static String arccos(int i, String s)
    {
       return replaceFunction(i,s,Math.acos(findArgVal(i,s)));
    }
-   public static String arctan(int i, String s)
+   private static String arctan(int i, String s)
    {
       return replaceFunction(i,s,Math.atan(findArgVal(i,s)));
    }
-   public static String logBaseTwo(int i, String s)
+   private static String logBaseTwo(int i, String s)
    {
       return replaceFunction(i,s,Math.log(findArgVal(i,s))/Math.log(2));
    }
-   public static String logBase10(int i, String s)
+   private static String logBase10(int i, String s)
    {
       return replaceFunction(i,s,Math.log10(findArgVal(i,s)));
    }
-   public static String naturalLog(int i, String s)
+   private static String naturalLog(int i, String s)
    {
       return replaceFunction(i,s,Math.log(findArgVal(i,s)));
    }

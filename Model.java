@@ -13,7 +13,7 @@ public class Model
    private static Graphics pen;
    private static boolean showGraph;
    private static double xScale, yScale;
-   public static void draw()
+   private static void draw()
    {
       pen.setColor(Color.WHITE);
       pen.fillRect(0,0,600,320);
@@ -71,7 +71,8 @@ public class Model
          catch(Exception e)
          {
             //System.out.println("err");
-            //function either does not exist at this x value, or is incorrectly formatted
+            //function either does not exist at this x value, 
+            //or is incorrectly formatted
          }
       }
    }
@@ -149,6 +150,23 @@ public class Model
          {
             //add Intersection Interface
          }
+         else if(src.getText().equals("x scale +"))
+         {
+            xScale--;
+         }
+         else if(src.getText().equals("x scale -"))
+         {
+            xScale++;
+         }
+         else if(src.getText().equals("y scale +"))
+         {
+            yScale--;
+         }
+         else if(src.getText().equals("y scale -"))
+         {
+            yScale++;
+         }
+         
       }
       private void checkNumbers(JButton src)
       {
@@ -200,7 +218,8 @@ public class Model
          {
             if(currentFunction.length()>0)
             {
-               currentFunction = currentFunction.substring(0,currentFunction.length()-1);
+               currentFunction = currentFunction.substring(0,
+                                                   currentFunction.length()-1);
             }else{
                previousFunctions.clear();
             }
@@ -259,13 +278,6 @@ public class Model
       }
       
    }
-   
-   
-   
-   
-   
-   
-   
    public static void main(String[] args)
    {
       xScale = 10;

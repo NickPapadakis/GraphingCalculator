@@ -1,6 +1,9 @@
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.event.ActionListener;
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JFrame;
 import java.util.ArrayList;
 public class View extends JFrame
 {
@@ -9,7 +12,10 @@ public class View extends JFrame
    private ArrayList<JButton> operations;
    private ArrayList<JButton> trig;
    private ArrayList<JButton> log;
-   private JButton leftParend, rightParend, decimal, delete, showGraph, addToGraph, hideGraph, clearEquations, findIntersects, variable;
+   private ArrayList<JButton> scalars;
+   private JButton leftParend, rightParend, decimal, delete, showGraph, 
+                    addToGraph, hideGraph, clearEquations, findIntersects, 
+                    variable, xScalePlus, xScaleMinus, yScalePlus, yScaleMinus;
    
    public View(ActionListener buttons)
    {
@@ -42,6 +48,10 @@ public class View extends JFrame
          b.addActionListener(buttons);
       }
       for(JButton b : log)
+      {
+         b.addActionListener(buttons);
+      }
+      for(JButton b : scalars)
       {
          b.addActionListener(buttons);
       }
@@ -110,6 +120,20 @@ public class View extends JFrame
       temp.setBounds(415,500,83,50);
       trig.add(temp);
       
+      scalars = new ArrayList<JButton>();
+      temp = new JButton("x scale +");
+      temp.setBounds(0,320,125,25);
+      scalars.add(temp);
+      temp = new JButton("x scale -");
+      temp.setBounds(125,320,125,25);
+      scalars.add(temp);
+      temp = new JButton("y scale +");
+      temp.setBounds(250,320,125,25);
+      scalars.add(temp);
+      temp = new JButton("y scale -");
+      temp.setBounds(375,320,125,25);
+      scalars.add(temp);
+      
       log = new ArrayList<JButton>();
       temp = new JButton("Log(2)");
       temp.setBounds(0,450,166,50);
@@ -144,6 +168,8 @@ public class View extends JFrame
       findIntersects.setBounds(332,350,83,50);
       variable = new JButton("x");
       variable.setBounds(415,350,83,50);
+      
+      
 
    }
    private void addButtons()
@@ -161,6 +187,10 @@ public class View extends JFrame
          p.add(b);
       }
       for(JButton b : log)
+      {
+         p.add(b);
+      }
+      for(JButton b : scalars)
       {
          p.add(b);
       }

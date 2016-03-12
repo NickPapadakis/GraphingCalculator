@@ -13,17 +13,14 @@ public class Function
    private static final double E = 1E-20;
    private static final int steps = 1000;
    private String function;
-
    public Function(String function)
    {
       this.function = function;
    }
-   
    public double getValue(double x)
    {
       return Parser.parse(function, x);
    }
-
    /**
    * Calculates the intersection of this Function and another based off of a
    * a range of x values. Only one intersection can exist between the given
