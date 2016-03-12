@@ -11,15 +11,64 @@ public class Model
    private static ArrayList<String> previousFunctions;
    private static String currentFunction;
    private static Graphics pen;
+   private static boolean showGraph;
    public static void draw()
    {
       pen.setColor(Color.WHITE);
       pen.fillRect(0,0,600,320);
-      pen.setColor(Color.BLACK);
-      pen.drawString(currentFunction,0,300);
-      for(int i = 0; i < previousFunctions.size();i++)
+      if(showGraph)
       {
-         pen.drawString(previousFunctions.get(i),0,280-(20*i));
+         int r,g,b;
+         r = g = b = 0;
+         for(Function f : userFunctions)
+         {
+            Color c = new Color(r,g,b);
+            graph(f,c);
+            //potential color shifting but needs some work
+            if(r+10<=255)
+            {
+               r+=10;
+            }else if(g+10<=255)
+            {
+               g+=10;
+            }
+            else
+            {
+               b+=10;
+            }
+         }
+         pen.setColor(Color.BLACK);
+         pen.drawLine(0,150,500,150);
+         pen.drawLine(250,0,250,300);
+         return;
+      }
+      else
+      {
+         pen.setColor(Color.BLACK);
+         pen.drawString(currentFunction,0,300);
+         for(int i = 0; i < previousFunctions.size();i++)
+         {
+               pen.drawString(previousFunctions.get(i),0,280-(20*i));      
+         }
+      }
+   }
+   private static void graph(Function f, Color c)
+   {
+      pen.setColor(c);
+      for(int i = -250; i < 250; i++)
+      {
+         try
+         {
+            double y = f.getValue(i);
+            int xPixel = 250 + i;
+            int yPixel = 150 - (int)y;
+            pen.fillRect(xPixel,yPixel,2,2);
+         }
+         catch(Exception e)
+         {
+            //System.out.println("err");
+            //function either does not exist at this x value, or is incorrectly formatted
+         }
       }
    }
    
@@ -65,9 +114,37 @@ public class Model
          }
          checkNumbers(src);
          checkFunctions(src);
+         checkGraphs(src);
          
          //System.out.println(currentFunction);
          draw();
+      }
+      private void checkGraphs(JButton src)
+      {
+         if(src.getText().equals("x"))
+         {
+            currentFunction += "x";
+         }
+         else if(src.getText().equals("Graph"))
+         {
+            showGraph = true;
+         }
+         else if(src.getText().equals("add to y="))
+         {
+            userFunctions.add(new Function(currentFunction));
+         }
+         else if(src.getText().equals("Hide"))
+         {
+           showGraph = false;
+         }
+         else if(src.getText().equals("Clear Y ="))
+         {
+            userFunctions.clear();
+         }
+         else if(src.getText().equals("Intersect"))
+         {
+            //add Intersection Interface
+         }
       }
       private void checkNumbers(JButton src)
       {
@@ -120,6 +197,8 @@ public class Model
             if(currentFunction.length()>0)
             {
                currentFunction = currentFunction.substring(0,currentFunction.length()-1);
+            }else{
+               previousFunctions.clear();
             }
          }
       }
@@ -185,6 +264,7 @@ public class Model
    
    public static void main(String[] args)
    {
+      userFunctions = new ArrayList<Function>();
       previousFunctions = new ArrayList<String>();
       currentFunction = "";
       View v = new View(new ButtonHandler());

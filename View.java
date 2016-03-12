@@ -9,7 +9,7 @@ public class View extends JFrame
    private ArrayList<JButton> operations;
    private ArrayList<JButton> trig;
    private ArrayList<JButton> log;
-   private JButton leftParend, rightParend, decimal, delete, showGraph, addToGraph, hideGraph, clearEquations, findIntersects;
+   private JButton leftParend, rightParend, decimal, delete, showGraph, addToGraph, hideGraph, clearEquations, findIntersects, variable;
    
    public View(ActionListener buttons)
    {
@@ -26,9 +26,6 @@ public class View extends JFrame
       addButtons();
       addActionListenerToButtons(buttons);
       p.repaint();
-      
-      
-      
    }
    private void addActionListenerToButtons(ActionListener buttons)
    {
@@ -57,6 +54,7 @@ public class View extends JFrame
       hideGraph.addActionListener(buttons);
       clearEquations.addActionListener(buttons);
       findIntersects.addActionListener(buttons);
+      variable.addActionListener(buttons);
    }
    private void createButtons()
    {
@@ -135,16 +133,17 @@ public class View extends JFrame
       rightParend.setBounds(250,400,250,50);
       
       showGraph = new JButton("Graph");
-      showGraph.setBounds(0,350,100,50);
+      showGraph.setBounds(0,350,83,50);
       addToGraph = new JButton("add to y=");
-      addToGraph.setBounds(100,350,100,50);
+      addToGraph.setBounds(83,350,83,50);
       hideGraph = new JButton("Hide");
-      hideGraph.setBounds(200,350,100,50);
+      hideGraph.setBounds(166,350,83,50);
       clearEquations = new JButton("Clear Y =");
-      clearEquations.setBounds(300,350,100,50);
+      clearEquations.setBounds(249,350,83,50);
       findIntersects = new JButton("Intersect");
-      findIntersects.setBounds(400,350,100,50);
-      
+      findIntersects.setBounds(332,350,83,50);
+      variable = new JButton("x");
+      variable.setBounds(415,350,83,50);
 
    }
    private void addButtons()
@@ -174,6 +173,7 @@ public class View extends JFrame
       p.add(hideGraph);
       p.add(clearEquations);
       p.add(findIntersects);
+      p.add(variable);
    }
    public Graphics getPen()
    {
