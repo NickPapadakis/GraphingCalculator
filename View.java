@@ -15,7 +15,8 @@ public class View extends JFrame
    private ArrayList<JButton> scalars;
    private JButton leftParend, rightParend, decimal, delete, showGraph, 
                     addToGraph, hideGraph, clearEquations, findIntersects, 
-                    variable, xScalePlus, xScaleMinus, yScalePlus, yScaleMinus;
+                    variable, xScalePlus, xScaleMinus, yScalePlus, yScaleMinus,
+                    clear, seperator;
    
    public View(ActionListener buttons)
    {
@@ -57,6 +58,8 @@ public class View extends JFrame
       }
       decimal.addActionListener(buttons);
       delete.addActionListener(buttons);
+      clear.addActionListener(buttons);
+      seperator.addActionListener(buttons);
       leftParend.addActionListener(buttons);
       rightParend.addActionListener(buttons);
       showGraph.addActionListener(buttons);
@@ -149,10 +152,13 @@ public class View extends JFrame
       log.add(temp);
       
       decimal = new JButton(".");
-      decimal.setBounds(0,750,166,50);
-      
+      decimal.setBounds(83,750,83,50);
       delete = new JButton("del");
-      delete.setBounds(332,750,166,50);
+      delete.setBounds(415,750,83,50);
+      seperator = new JButton("|");
+      seperator.setBounds(0,750,83,50);
+      clear = new JButton("clear");
+      clear.setBounds(332,750,83,50);
       
       leftParend = new JButton("(");
       leftParend.setBounds(0,400,250,50);
@@ -199,6 +205,8 @@ public class View extends JFrame
       }
       p.add(decimal);
       p.add(delete);
+      p.add(seperator);
+      p.add(clear);
       p.add(leftParend);
       p.add(rightParend);
       p.add(showGraph);

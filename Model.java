@@ -26,18 +26,18 @@ public class Model
             Color c = new Color(r,g,b);
             graph(f,c);
             //potential color shifting but needs some work
-            if(r+10<=255)
+            if(r+100<=255)
             {
-               r+=10;
-            }else if(g+10<=255)
+               r+=100;
+            }else if(g+100<=255)
             {
-               g+=10;
+               g+=100;
             }
             else
             {
-               if(b+10<=255)
+               if(b+100<=255)
                {
-                  b+=10;
+                  b+=100;
                }
             }
          }
@@ -55,6 +55,38 @@ public class Model
                pen.drawString(previousFunctions.get(i),0,280-(20*i));      
          }
       }
+   }
+   private static void findIntersection()
+   {
+      
+      String current = "";
+      String[] args = new String[4];
+      int index = 0;
+      for(int i = 0; i<currentFunction.length(); i++)
+      {
+         if(currentFunction.charAt(i) == '|')
+         {
+            args[index] = current;
+            current = "";
+            index++;
+            
+         }
+         else
+         {
+            current+=currentFunction.charAt(i);
+         }
+      }
+      try
+      {
+         double intersection = userFunctions.get(Integer.parseInt(args[0])).calculateIntersection(
+                            userFunctions.get(Integer.parseInt(args[1])), Double.parseDouble(args[2]), Double.parseDouble(args[3]));
+         currentFunction = ""+intersection;
+      }
+      catch(IndexOutOfBoundsException ie)
+      {
+         currentFunction = "Given Function Index Out of Bounds";
+      }
+      
    }
    private static void graph(Function f, Color c)
    {
@@ -98,7 +130,7 @@ public class Model
          }
          else if(src.getText().equals("-"))
          {
-            currentFunction += " - ";
+            currentFunction += " -";
          }
          else if(src.getText().equals("/"))
          {
@@ -163,7 +195,7 @@ public class Model
          }
          else if(src.getText().equals("Intersect"))
          {
-            //add Intersection Interface
+            findIntersection();
          }
          else if(src.getText().equals("x scale +"))
          {
@@ -237,6 +269,15 @@ public class Model
          else if(src.getText().equals("."))
          {
             currentFunction+=".";
+         }
+         else if(src.getText().equals("|"))
+         {
+            currentFunction+="|";
+         }
+         else if(src.getText().equals("clear"))
+         {
+            currentFunction = "";
+            previousFunctions.clear();
          }
          else if(src.getText().equals("del"))
          {
