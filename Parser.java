@@ -1,10 +1,22 @@
 import java.util.ArrayList;
-public final class Parser{
+
+public final class Parser
+{
    private static final double E = 1E-10;
    private static int pos;
    private static int c;
    private static String expression;
-   public static double parse(String ex, double x){
+
+   /**
+    * Takes a String representation of a function and calculates the value of 
+    * the function for the given x value.
+    *
+    * @param ex The function to parse represented as a String.
+    * @param x The given x value for calculating the value of the function.
+    * @return The y value of the given function for the given x value.
+    */
+   public static double parse(String ex, double x)
+   {
       //parse variables and special equations first;
       ex = replaceVariables(x, ex);
       pos = -1;
@@ -18,6 +30,7 @@ public final class Parser{
       }
       return v;
    } 
+
    private static String replaceVariables(double x, String function)
    {
       //special character codes to look for and replace.
@@ -53,6 +66,7 @@ public final class Parser{
       //System.out.println(s);
       return s;
    }
+
    private static String replaceWithFunction(int i, String s)
    {
       //figures out what function to preform.
@@ -95,69 +109,98 @@ public final class Parser{
       }
       return s;
    }
-   private static void eatChar(){
+
+   private static void eatChar()
+   {
       c = (++pos < expression.length()) ? expression.charAt(pos) : -1;
    }
-   private static void eatSpace(){
+
+   private static void eatSpace()
+   {
       while(Character.isWhitespace(c)){
          eatChar();
       }
    }
-   private static double parseExpression(){
+
+   private static double parseExpression()
+   {
       double v = parseTerm();
-      while(true){
+      while(true)
+      {
          eatSpace();
-         if(c == '+'){
+         if(c == '+')
+         {
             eatChar();
             v+=parseTerm();
-         }else if(c == '-'){
+         }
+         else if(c == '-')
+         {
             eatChar();
             v-=parseTerm();
-         } else {
+         }
+         else
+         {
             return v;
          }
       }
    }
-   private static double parseTerm(){
+
+   private static double parseTerm()
+   {
       double v = parseFactor();
-      while(true){
+      while(true)
+      {
          eatSpace();
-         if(c == '/'){
+         if(c == '/')
+         {
             eatChar();
             v /= parseFactor();
-         } else if(c == '*' || c == '('){
-            if(c == '*'){
+         }
+         else if(c == '*' || c == '(')
+         {
+            if(c == '*')
+            {
                eatChar();
             }
             v*=parseFactor();
-         }else{
+         }
+         else
+         {
             return v;
          }
       }
    }
-   private static double parseFactor(){
+
+   private static double parseFactor()
+   {
       double v;
       boolean negate = false;
       eatSpace();
-      if(c =='+' || c == '-'){
+      if(c =='+' || c == '-')
+      {
          negate = c == '-';
          eatChar();
          eatSpace();
       }
-      if(c == '('){
+      if(c == '(')
+      {
          eatChar();
          v = parseExpression();
-         if(c == ')'){
+         if(c == ')')
+         {
             eatChar();
          }
       }
-      else{
+      else
+      {
          int startIndex = pos;
          boolean small = false;
-         while((c >='0' && c <='9') || c =='.' || c == 'E' || c == '-'){
+         while((c >='0' && c <='9') || c =='.' || c == 'E' || c == '-')
+         {
             eatChar();
          }
-         if(pos==startIndex){
+         if(pos==startIndex)
+         {
             throw new SyntaxException("Error Char:" + (char)c);
             //return "Error Char:" + (char)c;
          }
@@ -172,30 +215,38 @@ public final class Parser{
          }
       }
       eatSpace();
-      if(c == '^'){
+      if(c == '^')
+      {
          eatChar();
          v = Math.pow(v, parseFactor());
       }
-      if(negate){
+      if(negate)
+      {
          v = -v;
       }
       return v;
    }
+
    private static double findArgVal(int j, String s)
    {
       String replace = s.substring(j+2);
       boolean found = false;
       int parendCount = 1;
       int index = 0;
-      for(int i = 0; i < replace.length() || !found; i++){
-         if(parendCount == 0){
+      for(int i = 0; i < replace.length() || !found; i++)
+      {
+         if(parendCount == 0)
+         {
             found = true;
             index = i;
             break;
          }
-         if(replace.charAt(i) == '('){
+         if(replace.charAt(i) == '(')
+         {
             parendCount++;
-         }else if(replace.charAt(i) == ')'){
+         }
+         else if(replace.charAt(i) == ')')
+         {
             parendCount--;
          }
       }
@@ -203,18 +254,24 @@ public final class Parser{
       double val =(parse(ex, 0));
       return val;
    }
+
    private static String replaceFunction(int j, String s, double v)
    {
       String replace = s.substring(j+2);
       boolean found = false;
       int parendCount = 1;
       int index = 0;
-      for(int i = 0; i < replace.length() || !found; i++){
-         if(replace.charAt(i) == '('){
+      for(int i = 0; i < replace.length() || !found; i++)
+      {
+         if(replace.charAt(i) == '(')
+         {
             parendCount++;
-         }else if(replace.charAt(i) == ')'){
+         }
+         else if(replace.charAt(i) == ')')
+         {
             parendCount--;
-            if(parendCount == 0){
+            if(parendCount == 0)
+            {
                found = true;
                index = i;
                break;
@@ -223,12 +280,15 @@ public final class Parser{
       }
       //String stringVal = handleSciNotation(v);
       return s.substring(0,j) + v + s.substring(j+index+3);
-   }  
+   }
+
    //this might be able to be removed, needs some testing first though
-   private static String handleSciNotation(double v){
+   private static String handleSciNotation(double v)
+   {
       String sval = String.valueOf(v);
       int index = sval.indexOf('E');
-      if(index == -1){
+      if(index == -1)
+      {
          return sval;
       }
       String rawVal = sval.substring(0,index);
@@ -241,19 +301,25 @@ public final class Parser{
       }
       
       int exponent = Integer.parseInt(exVal);
-      if(exponent<=-10){
+      if(exponent<=-10)
+      {
          return "0";
       }
       rawVal = rawVal.substring(0,1) + rawVal.substring(2);
-      if(exponent<0){
-         for(int i = 1; i < -1*exponent; i++){
+      if(exponent<0)
+      {
+         for(int i = 1; i < -1*exponent; i++)
+         {
             rawVal = "0" + rawVal;
          }
          return pref+"."+rawVal;
       }
-      if(exponent>0){
-         if(rawVal.length()-1 < exponent){
-            for(int i = 0; i <= exponent-rawVal.length(); i++){
+      if(exponent>0)
+      {
+         if(rawVal.length()-1 < exponent)
+         {
+            for(int i = 0; i <= exponent-rawVal.length(); i++)
+            {
                rawVal = rawVal + "0";
             }
             return pref+rawVal;
@@ -261,44 +327,53 @@ public final class Parser{
          return pref+rawVal.substring(0,exponent+1) + "." 
                      + rawVal.substring(exponent);
       }
-      else{
+      else
+      {
          System.out.println("Error in handlescinotation");
          return "ERROR";
       }      
-   }   
+   }
+
    private static String sin(int i, String s)
    {  
-      return replaceFunction(i,s,Math.sin(findArgVal(i,s)));
-      
+      return replaceFunction(i,s,Math.sin(findArgVal(i,s))); 
    }
+
    private static String cos(int i, String s)
    {
       return replaceFunction(i,s,Math.cos(findArgVal(i,s)));
    }
+   
    private static String tan(int i, String s)
    {
       return replaceFunction(i,s,Math.tan(findArgVal(i,s)));
    }
+
    private static String arcsin(int i, String s)
    {
       return replaceFunction(i,s,Math.asin(findArgVal(i,s)));
    }
+
    private static String arccos(int i, String s)
    {
       return replaceFunction(i,s,Math.acos(findArgVal(i,s)));
    }
+
    private static String arctan(int i, String s)
    {
       return replaceFunction(i,s,Math.atan(findArgVal(i,s)));
    }
+
    private static String logBaseTwo(int i, String s)
    {
       return replaceFunction(i,s,Math.log(findArgVal(i,s))/Math.log(2));
    }
+
    private static String logBase10(int i, String s)
    {
       return replaceFunction(i,s,Math.log10(findArgVal(i,s)));
    }
+
    private static String naturalLog(int i, String s)
    {
       return replaceFunction(i,s,Math.log(findArgVal(i,s)));
