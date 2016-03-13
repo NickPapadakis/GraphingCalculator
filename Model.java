@@ -44,6 +44,10 @@ public class Model
          pen.setColor(Color.BLACK);
          pen.drawLine(0,150,500,150);
          pen.drawLine(250,0,250,300);
+         pen.drawString(""+(int)(-250/xScale*100)/100.0, 0,180);
+         pen.drawString(""+(int)(250/xScale*100)/100.0, 450,180);
+         pen.drawString(""+(int)(150/yScale*100)/100.0, 250, 20);
+         pen.drawString(""+(int)(-150/yScale*100)/100.0, 250, 300);
          return;
       }
       else
@@ -212,15 +216,15 @@ public class Model
          }
          else if(src.getText().equals("y scale +"))
          {
+            yScale++;
+         }
+         else if(src.getText().equals("y scale -"))
+         {
             yScale--;
             if(yScale<=0)
             {
                yScale = 1;
             }
-         }
-         else if(src.getText().equals("y scale -"))
-         {
-            yScale++;
          }
          
       }
