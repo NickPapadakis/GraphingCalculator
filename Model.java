@@ -156,15 +156,24 @@ public class Model
          }
          else if(src.getText().equals("x scale +"))
          {
-            xScale--;
+            xScale++;
          }
          else if(src.getText().equals("x scale -"))
          {
-            xScale++;
+            
+            xScale--;
+            if(xScale<=0)
+            {
+               xScale = 1;
+            }
          }
          else if(src.getText().equals("y scale +"))
          {
             yScale--;
+            if(yScale<=0)
+            {
+               yScale = 1;
+            }
          }
          else if(src.getText().equals("y scale -"))
          {
