@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-public class Parser{
+public final class Parser{
    private static final double E = 1E-10;
    private static int pos;
    private static int c;
