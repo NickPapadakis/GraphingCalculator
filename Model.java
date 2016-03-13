@@ -35,7 +35,10 @@ public class Model
             }
             else
             {
-               b+=10;
+               if(b+10<=255)
+               {
+                  b+=10;
+               }
             }
          }
          pen.setColor(Color.BLACK);
@@ -68,11 +71,15 @@ public class Model
                pen.fillRect(xPixel,yPixel,2,2);
             }
          }
-         catch(Exception e)
+         catch(SyntaxException se)
          {
             //System.out.println("err");
             //function either does not exist at this x value, 
             //or is incorrectly formatted
+         }
+         catch(StringIndexOutOfBoundsException sie)
+         {
+            //same as above
          }
       }
    }
@@ -119,6 +126,10 @@ public class Model
             {
                System.out.println("Syntax Error");
                currentFunction = se.getText();
+            }
+            catch(StringIndexOutOfBoundsException sie)
+            {
+               System.out.println("Syntax Error");
             }
          }
          checkNumbers(src);
