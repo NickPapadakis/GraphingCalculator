@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.LinkedList;
 /**
     * will hold function. the Parser is very particular 
     * about formatting, especially around variables. Avoid a uniary minus
@@ -42,9 +42,9 @@ public class Function
       double stepSize = (rightXBound - leftXBound) / steps;
       double intersectionXValue = 0;
       boolean foundValue = false;
-      ArrayList<Double> xValues = new ArrayList<Double>();
-      ArrayList<Double> thisYValues = new ArrayList<Double>();
-      ArrayList<Double> otherYValues = new ArrayList<Double>();
+      LinkedList<Double> xValues = new LinkedList<Double>();
+      LinkedList<Double> thisYValues = new LinkedList<Double>();
+      LinkedList<Double> otherYValues = new LinkedList<Double>();
 
       do
       {
@@ -59,7 +59,7 @@ public class Function
            otherYValues.add(i, other.getValue(x));
          }
          
-         // Search through the ArrayLists to find an exact intersection or 
+         // Search through the LinkedLists to find an exact intersection or 
          // a domain where and intersection occurred
          boolean intersectionDetected = false;
          foundValue = false;
