@@ -102,6 +102,10 @@ public class Model
       {
          currentFunction = "Usage: index|index|leftBound|rightBound|";
       }
+      catch(SyntaxException se)
+      {
+         currentFunction = "Err";
+      }
       
       
    }
