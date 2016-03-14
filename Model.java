@@ -90,6 +90,19 @@ public class Model
       {
          currentFunction = "Given Function Index Out of Bounds";
       }
+      catch(IntersectionNotFoundException nfe)
+      {
+         currentFunction = "No Intersection Found";
+      }
+      catch(NumberFormatException fe)
+      {
+         currentFunction = "Usage: index|index|leftBound|rightBound|";
+      }
+      catch(NullPointerException ne)
+      {
+         currentFunction = "Usage: index|index|leftBound|rightBound|";
+      }
+      
       
    }
    private static void graph(Function f, Color c)

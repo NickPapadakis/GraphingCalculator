@@ -10,7 +10,7 @@ import java.util.LinkedList;
     */
 public class Function
 {
-   private static final double E = 1E-20;
+   private static final double E = 1E-10;
    private static final int steps = 1000;
    private String function;
    public Function(String function)
@@ -100,9 +100,9 @@ public class Function
             throw new IntersectionNotFoundException();
          }
       } while(!foundValue);
-      if(intersectionXValue - Math.round(intersectionXValue) < 1E-10)
+      if(intersectionXValue>-E && intersectionXValue<E)
       {
-            return Math.round(intersectionXValue);
+         return 0;
       }
       return intersectionXValue;
    }
