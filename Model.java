@@ -15,7 +15,7 @@ public class Model
    private static ArrayList<String> previousFunctions;
    private static String currentFunction;
    private static Graphics pen;
-   private static boolean showGraph;
+   private static boolean showGraph, lines;
    private static double xScale, yScale;
    private static void draw()
    {
@@ -129,6 +129,8 @@ public class Model
    private static void graph(Function f, Color c)
    {
       pen.setColor(c);
+      int lastXPix = 0;
+      int lastYPix = 0;
       for(int i = -250; i < 250; i++)
       {
          try
@@ -136,10 +138,16 @@ public class Model
             double y = f.getValue(i/xScale);
             int xPixel = 250 + i;
             int yPixel = 150 - ((int)(y*yScale));
-            if(yPixel<=300 && yPixel>=0)
+            if(lines && i>-250 && (lastYPix<=300 && yPixel<300))
+            {
+               pen.drawLine(lastXPix,lastYPix,xPixel,yPixel);
+            }
+            else if(yPixel<=300 && yPixel>=0)
             {
                pen.fillRect(xPixel,yPixel,2,2);
             }
+            lastXPix = xPixel;
+            lastYPix = yPixel;
          }
          catch(SyntaxException se)
          {
@@ -375,6 +383,10 @@ public class Model
          else if(src.getText().equals(")"))
          {
             currentFunction+=")";
+         }
+         else if(src.getText().equals("Toggle dots"))
+         {
+            lines = !lines;
          }
       }
       

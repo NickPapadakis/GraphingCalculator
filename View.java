@@ -21,7 +21,7 @@ public class View extends JFrame
    private JButton leftParend, rightParend, decimal, delete, showGraph, 
                     addToGraph, hideGraph, clearEquations, findIntersects, 
                     variable, xScalePlus, xScaleMinus, yScalePlus, yScaleMinus,
-                    clear, seperator;
+                    clear, seperator, toggleLines;
    /**
     * Construts the calculator GUI.
     *
@@ -72,6 +72,7 @@ public class View extends JFrame
       seperator.addActionListener(buttons);
       leftParend.addActionListener(buttons);
       rightParend.addActionListener(buttons);
+      toggleLines.addActionListener(buttons);
       showGraph.addActionListener(buttons);
       addToGraph.addActionListener(buttons);
       hideGraph.addActionListener(buttons);
@@ -171,9 +172,11 @@ public class View extends JFrame
       clear.setBounds(332,750,83,50);
       
       leftParend = new JButton("(");
-      leftParend.setBounds(0,400,250,50);
+      leftParend.setBounds(0,400,166,50);
       rightParend = new JButton(")");
-      rightParend.setBounds(250,400,250,50);
+      rightParend.setBounds(332,400,166,50);
+      toggleLines = new JButton("Toggle dots");
+      toggleLines.setBounds(166,400,166,50);
       
       showGraph = new JButton("Graph");
       showGraph.setBounds(0,350,83,50);
@@ -221,6 +224,7 @@ public class View extends JFrame
       p.add(clear);
       p.add(leftParend);
       p.add(rightParend);
+      p.add(toggleLines);
       p.add(showGraph);
       p.add(addToGraph);
       p.add(hideGraph);
