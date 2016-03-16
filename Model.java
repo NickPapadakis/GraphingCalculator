@@ -57,12 +57,25 @@ public class Model
       else
       {
          pen.setColor(Color.BLACK);
-         pen.drawString(currentFunction,0,300);
+         pen.drawString(viewable(currentFunction),0,300);
          for(int i = 0; i < previousFunctions.size();i++)
          {
                pen.drawString(previousFunctions.get(i),0,280-(20*i));      
          }
       }
+   }
+   private static String viewable(String s)
+   {
+      if(s.length()>46)
+      {
+         String newS = "";
+         for(int i = s.length()-46; i < s.length(); i++)
+         {
+            newS += s.charAt(i);
+         }
+         return newS;
+      }
+      return s;
    }
    private static void findIntersection()
    {
