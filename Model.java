@@ -133,8 +133,8 @@ public class Model
    private static void graph(Function f, Color c)
    {
       pen.setColor(c);
-      int lastXPix = 0;
-      int lastYPix = 0;
+      int lastXPix = 500;
+      int lastYPix = 500;
       for(int i = -250; i < 250; i++)
       {
          try
