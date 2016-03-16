@@ -390,16 +390,12 @@ public class Model
          {
             currentFunction+=")";
          }
-<<<<<<< HEAD
          else if(src.getText().equals("Toggle dots"))
          {
             lines = !lines;
          }
-      }
-      
-=======
       } 
->>>>>>> 2fe0749fa6e11524d3c9fd6bd2f110c5dd3a2463
+
    }
 
    /**
