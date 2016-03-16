@@ -1,5 +1,6 @@
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Font;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -177,10 +178,12 @@ public class View extends JFrame
       showGraph = new JButton("Graph");
       showGraph.setBounds(0,350,83,50);
       addToGraph = new JButton("add to y=");
+      addToGraph.setFont(new Font(null,10,10));
       addToGraph.setBounds(83,350,83,50);
       hideGraph = new JButton("Hide");
       hideGraph.setBounds(166,350,83,50);
       clearEquations = new JButton("Clear Y =");
+      clearEquations.setFont(new Font(null,0,10));
       clearEquations.setBounds(249,350,83,50);
       findIntersects = new JButton("Intersect");
       findIntersects.setBounds(332,350,83,50);
