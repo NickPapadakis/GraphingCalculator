@@ -1,5 +1,8 @@
 import java.util.ArrayList;
-
+/**
+ * A class to take standard notaion functions and turn them into a value that 
+ * the computer can understand.
+ */
 public final class Parser
 {
    private static final double E = 1E-10;
@@ -278,60 +281,7 @@ public final class Parser
             }
          }
       }
-      //String stringVal = handleSciNotation(v);
       return s.substring(0,j) + v + s.substring(j+index+3);
-   }
-
-   //this might be able to be removed, needs some testing first though
-   private static String handleSciNotation(double v)
-   {
-      String sval = String.valueOf(v);
-      int index = sval.indexOf('E');
-      if(index == -1)
-      {
-         return sval;
-      }
-      String rawVal = sval.substring(0,index);
-      String exVal = sval.substring(index+1);
-      String pref = "";
-      if(rawVal.charAt(0) == '-')
-      {
-         rawVal = rawVal.substring(1);
-         pref = "-";
-      }
-      
-      int exponent = Integer.parseInt(exVal);
-      if(exponent<=-10)
-      {
-         return "0";
-      }
-      rawVal = rawVal.substring(0,1) + rawVal.substring(2);
-      if(exponent<0)
-      {
-         for(int i = 1; i < -1*exponent; i++)
-         {
-            rawVal = "0" + rawVal;
-         }
-         return pref+"."+rawVal;
-      }
-      if(exponent>0)
-      {
-         if(rawVal.length()-1 < exponent)
-         {
-            for(int i = 0; i <= exponent-rawVal.length(); i++)
-            {
-               rawVal = rawVal + "0";
-            }
-            return pref+rawVal;
-         }
-         return pref+rawVal.substring(0,exponent+1) + "." 
-                     + rawVal.substring(exponent);
-      }
-      else
-      {
-         System.out.println("Error in handlescinotation");
-         return "ERROR";
-      }      
    }
 
    private static String sin(int i, String s)

@@ -5,6 +5,10 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 import java.util.ArrayList;
+/**
+ * A class to provide a GUI for the calculator and a way to input functions.
+ * 
+ */
 public class View extends JFrame
 {
    private JPanel p;
@@ -17,7 +21,12 @@ public class View extends JFrame
                     addToGraph, hideGraph, clearEquations, findIntersects, 
                     variable, xScalePlus, xScaleMinus, yScalePlus, yScaleMinus,
                     clear, seperator;
-   
+   /**
+    * Construts the calculator GUI.
+    *
+    *
+    * @param buttons an actions listener to give functionality to the buttons.
+    */
    public View(ActionListener buttons)
    {
       super("Graphing Calculator");
@@ -216,6 +225,11 @@ public class View extends JFrame
       p.add(findIntersects);
       p.add(variable);
    }
+   /**
+    * A method to provide a way to draw on the calculators screen.
+    *
+    * @return Graphics object to draw on the screen of the GUI.
+    */
    public Graphics getPen()
    {
       return p.getGraphics();

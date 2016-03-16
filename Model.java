@@ -5,6 +5,10 @@ import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Font;
+/**
+ * A class to run the calculator and connect the GUI to the actual data and 
+ * processing.
+ */
 public class Model
 {
    private static ArrayList<Function> userFunctions;
@@ -142,7 +146,6 @@ public class Model
    
    private static class ButtonHandler implements ActionListener
    {
-      //incomplete, here is where the buttons call functions
       public void actionPerformed(ActionEvent e) {
 			JButton src = (JButton)(e.getSource());
          if(src.getText().equals("+"))
@@ -363,6 +366,10 @@ public class Model
       }
       
    }
+   /**
+    * Constructs and runs calculator.
+    * @param args - The command line arguments
+    */
    public static void main(String[] args)
    {
       xScale = 10;
