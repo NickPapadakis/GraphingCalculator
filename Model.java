@@ -17,6 +17,7 @@ public class Model
    private static Graphics pen;
    private static boolean showGraph;
    private static double xScale, yScale;
+
    private static void draw()
    {
       pen.setColor(Color.WHITE);
@@ -64,9 +65,9 @@ public class Model
          }
       }
    }
+
    private static void findIntersection()
-   {
-      
+   {    
       String current = "";
       String[] args = new String[4];
       int index = 0;
@@ -86,8 +87,10 @@ public class Model
       }
       try
       {
-         double intersection = userFunctions.get(Integer.parseInt(args[0])).calculateIntersection(
-                            userFunctions.get(Integer.parseInt(args[1])), Double.parseDouble(args[2]), Double.parseDouble(args[3]));
+         double intersection = 
+            userFunctions.get(Integer.parseInt(args[0])).calculateIntersection(
+            userFunctions.get(Integer.parseInt(args[1])), 
+            Double.parseDouble(args[2]), Double.parseDouble(args[3]));
          currentFunction = ""+intersection;
       }
       catch(IndexOutOfBoundsException ie)
@@ -146,8 +149,9 @@ public class Model
    
    private static class ButtonHandler implements ActionListener
    {
-      public void actionPerformed(ActionEvent e) {
-			JButton src = (JButton)(e.getSource());
+      public void actionPerformed(ActionEvent e)
+      {
+	 JButton src = (JButton)(e.getSource());
          if(src.getText().equals("+"))
          {
             currentFunction += " + ";
@@ -195,6 +199,7 @@ public class Model
          //System.out.println(currentFunction);
          draw();
       }
+
       private void checkGraphs(JButton src)
       {
          if(src.getText().equals("x"))
@@ -247,6 +252,7 @@ public class Model
          }
          
       }
+
       private void checkNumbers(JButton src)
       {
          if(src.getText().equals("0"))
@@ -308,7 +314,9 @@ public class Model
             {
                currentFunction = currentFunction.substring(0,
                                                    currentFunction.length()-1);
-            }else{
+            }
+            else
+            {
                previousFunctions.clear();
             }
          }
@@ -363,9 +371,9 @@ public class Model
          {
             currentFunction+=")";
          }
-      }
-      
+      } 
    }
+
    /**
     * Constructs and runs calculator.
     * @param args - The command line arguments
